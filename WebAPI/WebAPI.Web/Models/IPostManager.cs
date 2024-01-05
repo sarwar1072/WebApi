@@ -7,5 +7,6 @@ namespace WebAPI.Web.Models
         Post GetById(int id);
         ICollection<Post> Search(string search);
         ICollection<Post> SearchString(string search);
+        ICollection<Post> PagingList(int page, int pageSize);
     }
 }

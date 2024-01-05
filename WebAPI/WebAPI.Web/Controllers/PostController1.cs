@@ -155,6 +155,22 @@ namespace WebAPI.Web.Controllers
                 return BadRequest(ex.Message);  
             }
         }
-
+        [HttpGet]
+        public IActionResult PagingData(int page=1)
+        {
+            try
+            {
+                var pageingdata=_postManager.PagingList(page, 2);
+                if(pageingdata.Count() == 0)
+                {
+                    return NotFound("not found");
+                }
+                return Ok(pageingdata);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -21,5 +21,14 @@ namespace WebAPI.Web.Models
         {
            return GetFirstOrDefault(x=>x.Id == id); 
         }
+        public ICollection<Post> PagingList(int page,int pageSize) 
+        {
+            if (page <= 1)
+            {
+                page = 0;   
+            }
+            int pageNumber=page*pageSize;   
+            return GetAll().Skip(pageNumber).Take(pageSize).ToList();
+        }
     }
 }
