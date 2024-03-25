@@ -22,7 +22,7 @@ namespace WebAPI.Web.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Category", b =>
+            modelBuilder.Entity("WebAPI.Web.Models.VillaModel.House", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -30,305 +30,107 @@ namespace WebAPI.Web.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Amenity")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Categories");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Country", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Countries");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Owner", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CountryId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gym")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CountryId");
-
-                    b.ToTable("Owners");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Pokemon", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime>("Createddate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Pokemons");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.PokemonCategory", b =>
-                {
-                    b.Property<int>("PokemonId")
+                    b.Property<int>("Occupancy")
                         .HasColumnType("int");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<double>("Rate")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Sqrt")
                         .HasColumnType("int");
 
-                    b.HasKey("PokemonId", "CategoryId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("PokemonCategories");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.PokemonOwner", b =>
-                {
-                    b.Property<int>("PokemonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("OwnerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PokemonId", "OwnerId");
-
-                    b.HasIndex("OwnerId");
-
-                    b.ToTable("PokemonOwners");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("PokemonId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Rating")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ReviewerId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Text")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PokemonId");
-
-                    b.HasIndex("ReviewerId");
-
-                    b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Reviewer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Reviewers");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("DateTime")
+                    b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Posts");
-                });
+                    b.ToTable("Houses");
 
-            modelBuilder.Entity("WebAPI.Web.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Img")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Owner", b =>
-                {
-                    b.HasOne("WebAPI.Web.Models.PokemonModel.Country", "Country")
-                        .WithMany("Owners")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.PokemonCategory", b =>
-                {
-                    b.HasOne("WebAPI.Web.Models.PokemonModel.Category", "Category")
-                        .WithMany("PokemonCategories")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebAPI.Web.Models.PokemonModel.Pokemon", "Pokemon")
-                        .WithMany("PokemonCategories")
-                        .HasForeignKey("PokemonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Pokemon");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.PokemonOwner", b =>
-                {
-                    b.HasOne("WebAPI.Web.Models.PokemonModel.Owner", "Owner")
-                        .WithMany("PokemonOwners")
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebAPI.Web.Models.PokemonModel.Pokemon", "Pokemon")
-                        .WithMany("PokemonOwners")
-                        .HasForeignKey("PokemonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
-
-                    b.Navigation("Pokemon");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Review", b =>
-                {
-                    b.HasOne("WebAPI.Web.Models.PokemonModel.Pokemon", "Pokemon")
-                        .WithMany("Reviews")
-                        .HasForeignKey("PokemonId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebAPI.Web.Models.PokemonModel.Reviewer", "Reviewer")
-                        .WithMany("Reviews")
-                        .HasForeignKey("ReviewerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Pokemon");
-
-                    b.Navigation("Reviewer");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Category", b =>
-                {
-                    b.Navigation("PokemonCategories");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Country", b =>
-                {
-                    b.Navigation("Owners");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Owner", b =>
-                {
-                    b.Navigation("PokemonOwners");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Pokemon", b =>
-                {
-                    b.Navigation("PokemonCategories");
-
-                    b.Navigation("PokemonOwners");
-
-                    b.Navigation("Reviews");
-                });
-
-            modelBuilder.Entity("WebAPI.Web.Models.PokemonModel.Reviewer", b =>
-                {
-                    b.Navigation("Reviews");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Amenity = "",
+                            Createddate = new DateTime(2024, 1, 10, 17, 34, 24, 618, DateTimeKind.Local).AddTicks(9453),
+                            Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
+                            ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa3.jpg",
+                            Name = "Royal Villa",
+                            Occupancy = 4,
+                            Rate = 200.0,
+                            Sqrt = 550,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Amenity = "",
+                            Createddate = new DateTime(2024, 1, 10, 17, 34, 24, 618, DateTimeKind.Local).AddTicks(9472),
+                            Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
+                            ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa1.jpg",
+                            Name = "Premium Pool Villa",
+                            Occupancy = 4,
+                            Rate = 300.0,
+                            Sqrt = 550,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Amenity = "",
+                            Createddate = new DateTime(2024, 1, 10, 17, 34, 24, 618, DateTimeKind.Local).AddTicks(9474),
+                            Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
+                            ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa4.jpg",
+                            Name = "Luxury Pool Villa",
+                            Occupancy = 4,
+                            Rate = 400.0,
+                            Sqrt = 750,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Amenity = "",
+                            Createddate = new DateTime(2024, 1, 10, 17, 34, 24, 618, DateTimeKind.Local).AddTicks(9477),
+                            Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
+                            ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa5.jpg",
+                            Name = "Diamond Villa",
+                            Occupancy = 4,
+                            Rate = 550.0,
+                            Sqrt = 900,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Amenity = "",
+                            Createddate = new DateTime(2024, 1, 10, 17, 34, 24, 618, DateTimeKind.Local).AddTicks(9479),
+                            Details = "Fusce 11 tincidunt maximus leo, sed scelerisque massa auctor sit amet. Donec ex mauris, hendrerit quis nibh ac, efficitur fringilla enim.",
+                            ImageUrl = "https://dotnetmastery.com/bluevillaimages/villa2.jpg",
+                            Name = "Diamond Pool Villa",
+                            Occupancy = 4,
+                            Rate = 600.0,
+                            Sqrt = 1100,
+                            UpdatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 #pragma warning restore 612, 618
         }

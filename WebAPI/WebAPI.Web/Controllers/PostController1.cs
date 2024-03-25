@@ -93,8 +93,7 @@ namespace WebAPI.Web.Controllers
             catch(Exception ex)
             {
                 return BadRequest(ex.Message);  
-            }
-           
+            }          
         }
         [HttpDelete("{id}")]
         public IActionResult DeleteById(int id)

@@ -1,7 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using Serilog;
 using WebAPI.Web.Context;
+using WebAPI.Web.Logging;
 using WebAPI.Web.Models;
+using WebAPI.Web.Models.VillaRepository;
 using WebAPI.Web.Models.Repositories;
 
 namespace WebAPI.Web
@@ -15,18 +18,23 @@ namespace WebAPI.Web
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            //Log.Logger=new LoggerConfiguration().MinimumLevel.Debug()
+            //    .WriteTo.File("log/Files.text",rollingInterval:RollingInterval.Infinite).CreateLogger();
+            //builder.Host.UseSerilog();
+
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());    
 
             builder.Services.AddTransient<IPostManager, PostManager>();
             builder.Services.AddTransient<IProductManager, ProductManager>();
             builder.Services.AddTransient<IFileService,FileService>();
-            builder.Services.AddTransient<IPokemonRepository, PokemonRepository>();
-            builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+            //builder.Services.AddTransient<IPokemonRepository, PokemonRepository>();
+            //builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
             builder.Services.AddTransient<ICountryRepository, CountryRepository>();
             builder.Services.AddTransient<IOwnerRepository, OwnerRepository>();
             builder.Services.AddTransient<IReviewRepository, ReviewRepository>();
             builder.Services.AddTransient<IReviewerRepository, ReviewerRepository>();
-
+            builder.Services.AddTransient<ILogClass, LogClass>();
+            builder.Services.AddTransient<IHouseRepository, HouseRepository>();
             builder.Services.AddControllers();
             builder.Services.AddTransient<Seed>();
 
@@ -44,19 +52,19 @@ namespace WebAPI.Web
             //     RequestPath = "/Resources"
             // });
 
-            if (args.Length == 1 && args[0].ToLower() == "seeddata")
-                SeedData(app);
+            //if (args.Length == 1 && args[0].ToLower() == "seeddata")
+            //    SeedData(app);
 
-            void SeedData(IHost app)
-            {
-                var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
+            //void SeedData(IHost app)
+            //{
+            //    var scopedFactory = app.Services.GetService<IServiceScopeFactory>();
 
-                using (var scope = scopedFactory.CreateScope())
-                {
-                    var service = scope.ServiceProvider.GetService<Seed>();
-                    service.SeedDataContext();
-                }
-            }
+            //    using (var scope = scopedFactory.CreateScope())
+            //    {
+            //        var service = scope.ServiceProvider.GetService<Seed>();
+            //        service.SeedDataContext();
+            //    }
+            //}
 
             if (app.Environment.IsDevelopment())
             {

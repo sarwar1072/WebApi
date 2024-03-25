@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebAPI.Web.Logging;
 using WebAPI.Web.Models.DTO;
 using WebAPI.Web.Models.PokemonModel;
 using WebAPI.Web.Models.Repositories;
@@ -13,10 +14,13 @@ namespace WebAPI.Web.Controllers
     {
         private readonly IPokemonRepository _pokemon;
         private readonly IMapper _mapper;
-        public PokemonController(IPokemonRepository pokemon,IMapper mapper)
+        private readonly ILogClass _logger;
+        public PokemonController(IPokemonRepository pokemon,IMapper mapper,
+            ILogClass logger)
         {
                 _pokemon = pokemon; 
             _mapper = mapper;
+            _logger= logger;    
         }
         [HttpGet]
         [ProducesResponseType(200,Type=typeof(IEnumerable<Pokemon>))]
@@ -24,8 +28,9 @@ namespace WebAPI.Web.Controllers
         {
           var pokemon=_mapper.Map<List<PokemonDTO>>(_pokemon.GetPokemonList());
             if(!ModelState.IsValid)
-                return BadRequest(ModelState);  
-
+                return BadRequest(ModelState);
+            //custom logging 
+            _logger.LogMethod("Its ok","");
             return Ok(pokemon);                 
         }
         [HttpGet("{id}")]
@@ -34,7 +39,10 @@ namespace WebAPI.Web.Controllers
         public IActionResult ExistPokimon(int id)
         {
             if (!_pokemon.PokemonExists(id))
+            {
+                _logger.LogMethod(" not foundlog ", "error");
                 return NotFound("Not found this type of pokemon");
+            }
 
             var isExist=_mapper.Map<PokemonDTO>(_pokemon.PokemonExists(id));
 

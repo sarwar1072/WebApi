@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using WebAPI.Web.Models.DTO;
 using WebAPI.Web.Models.PokemonModel;
+using WebAPI.Web.Models.VillaModel;
 
 namespace WebAPI.Web.Profiles
 {
@@ -10,6 +11,8 @@ namespace WebAPI.Web.Profiles
         {
             CreateMap<Pokemon, PokemonDTO>();
             CreateMap<Category, CategoryDTO>();
+            CreateMap<House, HouseDTO>();
+            CreateMap<HouseDTO, House>();
 
         }
     }

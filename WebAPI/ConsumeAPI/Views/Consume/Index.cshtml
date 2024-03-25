@@ -1,0 +1,44 @@
+﻿@model IEnumerable<WebAPI.Web.Models.VillaModel.House>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-10 offset-1">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead class="bg-dark text-light text-center">
+                        <tr>
+                            <th>Name</th>
+                            <th>Details</th>
+                            <th>Rate</th>
+                            <th>Sqrt</th>
+                            <th>Occupancy</th>
+                            <th>Amenity</th>
+                            <th>Created Date</th>
+                            <th>Updated date</th>
+                            <th>Images</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                    @if (Model.Count() > 0)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Details</td>
+                                <td>@item.Rate</td>
+                                <td>@item.Sqrt</td>
+                                <td>@item.Occupancy</td>
+                                <td>@item.Amenity</td>
+                                <td>@item.Createddate</td>
+                                <td>@item.UpdatedDate</td>
+                                <td>@item.ImageUrl</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
