@@ -30,7 +30,7 @@ namespace WebAPI.Web.Controllers
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
             //custom logging 
-            _logger.LogMethod("Its ok","");
+            _logger.LogMethod("Its Ok request","");
             return Ok(pokemon);                 
         }
         [HttpGet("{id}")]
@@ -41,7 +41,7 @@ namespace WebAPI.Web.Controllers
             if (!_pokemon.PokemonExists(id))
             {
                 _logger.LogMethod(" not foundlog ", "error");
-                return NotFound("Not found this type of pokemon");
+                return NotFound("This type of pokemon was not found");
             }
 
             var isExist=_mapper.Map<PokemonDTO>(_pokemon.PokemonExists(id));
@@ -57,7 +57,7 @@ namespace WebAPI.Web.Controllers
         public IActionResult GetRating(int id) 
         {
             if (!_pokemon.PokemonExists(id))
-                return NotFound("pokeman not in here");
+                return NotFound("pokeman is not in here");
 
             var rating=_pokemon.GetPokemonRating(id);
             if (!ModelState.IsValid)
