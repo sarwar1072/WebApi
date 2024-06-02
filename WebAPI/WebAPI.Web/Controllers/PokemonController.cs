@@ -41,7 +41,7 @@ namespace WebAPI.Web.Controllers
             if (!_pokemon.PokemonExists(id))
             {
                 _logger.LogMethod(" not foundlog ", "error");
-                return NotFound("This type of pokemon was not found");
+                return NotFound("This type of pokemon was not found.please try another way");
             }
 
             var isExist=_mapper.Map<PokemonDTO>(_pokemon.PokemonExists(id));
@@ -57,7 +57,7 @@ namespace WebAPI.Web.Controllers
         public IActionResult GetRating(int id) 
         {
             if (!_pokemon.PokemonExists(id))
-                return NotFound("pokeman is not in here");
+                return NotFound("Pokemon not found in here");
 
             var rating=_pokemon.GetPokemonRating(id);
             if (!ModelState.IsValid)
